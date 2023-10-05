@@ -1,0 +1,23 @@
+- Voice-to-text app that records and transcribes spoken words into written text
+- Allows users to easily convert their voice recordings into written notes
+- Features a text-to-voice function that reads out the transcribed text
+- Provides a convenient way to capture and retrieve spoken information
+- Can be used for note-taking, dictation, or transcribing interviews and meetings
+- App records voice and converts it into text
+- Text can be saved or shared
+- App can convert text back into voice
+- Functionality of app revolves around voice-to-text and text-to-voice conversion
+- App description: Voice recording app that converts speech to text and allows for playback of recorded text
+- Functionality: Records user's voice and transcribes it into text format
+- Playback feature: Allows users to listen to their recorded text
+- Unclear if the app is functional or in development
+- No information provided on platform compatibility or availability
+- App: Voice recording app
+- Function: Converts voice to text and creates notes
+- Technology: Uses ChadGBT and Whisper
+- Developer: Sean Clifford
+- App: Voice recording and note-taking
+- Function: Converts voice into text and generates notes
+- Technology: ChadGBT and Whisper used for voice-to-text conversion
+- Developer: Sean Clifford
+- Overall performance: Works very well

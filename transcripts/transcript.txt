@@ -1,0 +1,2 @@
+This is an app to record your voice. It takes your voice, turns it into text, and then takes notes based on that text. It uses ChadGBT and Whisper to do this. It is made by Sean Clifford.
+This works very well.
