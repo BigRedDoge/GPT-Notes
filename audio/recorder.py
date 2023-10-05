@@ -1,12 +1,14 @@
 import threading
 import pyaudio
+import wave
 
 
 class AudioRecorder(threading.Thread):
     # arg queue: Queue, record_length: int length of time to record, sample_rate: int, frames_per_buffer: int
-    def __init__(self, queue, record_length=15, sample_rate=44100, frames_per_buffer=1024):
+    def __init__(self, queue, record_length=5, sample_rate=44100, frames_per_buffer=1024):
         threading.Thread.__init__(self)
         self.queue = queue
+        self.audio_path = "audio/recording.wav"
         self.p = pyaudio.PyAudio()
         self.frames = []
         self.record_length = record_length
@@ -23,6 +25,7 @@ class AudioRecorder(threading.Thread):
                 data = self.stream.read(1024)
                 self.frames.append(data)
             self.queue.put(self.frames)
+            #self.save_audio()
             self.frames = []
     
     # shutdown stream
@@ -30,6 +33,15 @@ class AudioRecorder(threading.Thread):
         self.stream.stop_stream()
         self.stream.close()
         self.p.terminate()
+
+    # save audio file
+    def save_audio(self):
+        with wave.open(self.audio_path, 'wb') as wf:
+            wf.setnchannels(1)
+            wf.setsampwidth(self.p.get_sample_size(pyaudio.paInt16))
+            wf.setframerate(44100)
+            wf.writeframes(b''.join(self.frames))
+            
 
     
 def record_audio(queue):
