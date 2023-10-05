@@ -1,6 +1,6 @@
 # GPT Notes
 
-This is a project that records audio, transcribes the audio using OpenAI's Whisper API, and uses ChatGPT to parse the text.
+This is a project that records audio, transcribes the audio using OpenAI's Whisper API, and uses ChatGPT to take notes on the recorded text.
 
 ## Installation
 
