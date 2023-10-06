@@ -1,32 +1,36 @@
 import openai
-import dotenv
-import os
-
-#dotenv.load_dotenv()
-#openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
 class ChatGPT:
-    def __init__(self):
-        self.temperature = 0.5
+    def __init__(self, note):
+        self.note = note
+        self.temperature = 0.7
         self.history_len = 5
-        self.completions_path = "transcripts/completions.txt"
         self.messages = [
-            {"role": "system", "content": "You are a note taker. Take notes on the following prompts. Keep your notes concise and to the point. Don't add any extra information not in the prompt."}
+            {"role": "system", "content": "You are a note taker. Take notes on the last prompt. Don't repeat the content of previous notes. Feel free to add any information you think is relevant."}
         ]
 
     def chat_completion(self, text):
         # uses last history_len messages for context
+        transcript = self.note.get_transcript(self.history_len)
+        completions = self.note.get_completions(self.history_len)
+        print("transcript: ", transcript)
+        print("completions: ", completions)
+        history = self.history_len if len(completions) > self.history_len else len(completions)
+        for i in range(history):
+            self.messages.append({"role": "user", "content": transcript[i]})
+            self.messages.append({"role": "assistant", "content": completions[i]})
         self.messages.append({"role": "user", "content": text})
-        recent_messages = [self.messages[0]] + self.messages[-self.history_len:]
+
+        print("messages: ", self.messages)
 
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             temperature=self.temperature,
-            messages=recent_messages
+            messages=self.messages
         )
         content = response["choices"][0]["message"]["content"]
-        self.save_message(content)
+        #self.save_message(content)
         return content
     
     def save_message(self, message):
