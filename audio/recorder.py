@@ -5,10 +5,10 @@ import wave
 
 class AudioRecorder(threading.Thread):
     # arg queue: Queue, record_length: int length of time to record, sample_rate: int, frames_per_buffer: int
-    def __init__(self, queue, record_length=5, sample_rate=44100, frames_per_buffer=1024):
+    def __init__(self, queue, record_length=5, sample_rate=44100, frames_per_buffer=102, audio_path = "audio/recording.wav"):
         threading.Thread.__init__(self)
         self.queue = queue
-        self.audio_path = "audio/recording.wav"
+        self.audio_path = audio_path
         self.p = pyaudio.PyAudio()
         self.frames = []
         self.record_length = record_length
@@ -42,15 +42,3 @@ class AudioRecorder(threading.Thread):
             wf.setframerate(44100)
             wf.writeframes(b''.join(self.frames))
             
-
-    
-def record_audio(queue):
-    p = pyaudio.PyAudio()
-    stream = p.open(format=pyaudio.paInt16, channels=1, rate=44100, input=True, frames_per_buffer=1024)
-    frames = []
-    while True:
-        data = stream.read(1024)
-        frames.append(data)
-        if len(frames) == 100:
-            queue.put(data)
-            frames = []
