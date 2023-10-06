@@ -33,6 +33,7 @@ To install the project, follow these steps:
    PINECONE_INDEX=<your_index_name>
    ```
    
+6.  You need to clone the chatgpt-retrieval-plugin github respository and export the environment variables above.  Start the server using poetry.
 
 ## Usage
 
