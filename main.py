@@ -7,7 +7,7 @@ import sys
 from audio.recorder import AudioRecorder
 from audio.transcriber import Transcriber
 from chatgpt.completions import ChatGPT
-from notes import Note, NoteStorage
+from notes import NoteStorage
 
 
 dotenv.load_dotenv()
