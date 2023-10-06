@@ -33,16 +33,20 @@ class Note:
 
     def save(self):
         with open(self.path + "/transcript.txt", "w") as f:
-            f.write("".join(self.transcript))
+            f.write("".join(self.transcript + ["\n"]))
         with open(self.path + "/completions.txt", "w") as f:
-            f.write("".join(self.completions))
+            f.write("".join(self.completions + ["\n"]))
 
     def add_transcript(self, text):
-        self.transcript.append(text)
+        self.transcript.append(text + "\n")
 
     def add_completion(self, text):
-        self.completions.append(text)
+        self.completions.append(text + "\n")
     
-
+    def get_transcript(self, history_len=5):
+        return self.transcript[-history_len:]
+    
+    def get_completions(self, history_len=5):
+        return self.completions[-history_len:]
 
 
