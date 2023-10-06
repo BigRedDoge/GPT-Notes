@@ -1,5 +1,3 @@
-
-
 class NoteStorage:
     def __init__(self, path):
         self.path = path
@@ -33,15 +31,17 @@ class Note:
 
     def save(self):
         with open(self.path + "/transcript.txt", "w") as f:
-            f.write("".join(self.transcript + ["\n"]))
+            for line in self.transcript:
+                f.write(line + "\n")
         with open(self.path + "/completions.txt", "w") as f:
-            f.write("".join(self.completions + ["\n"]))
+            for line in self.completions:
+                f.write(line + "\n")
 
     def add_transcript(self, text):
-        self.transcript.append(text + "\n")
+        self.transcript.append(text)
 
     def add_completion(self, text):
-        self.completions.append(text + "\n")
+        self.completions.append(text)
     
     def get_transcript(self, history_len=5):
         return self.transcript[-history_len:]
