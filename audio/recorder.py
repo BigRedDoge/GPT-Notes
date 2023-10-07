@@ -4,7 +4,10 @@ import wave
 
 
 class AudioRecorder(threading.Thread):
-    # arg queue: Queue, record_length: int length of time to record, sample_rate: int, frames_per_buffer: int
+    """
+    Thread to record audio and put it into a queue
+    args - queue: Queue, record_length: int length of time to record, sample_rate: int, frames_per_buffer: int
+    """
     def __init__(self, queue, record_length=5, sample_rate=44100, frames_per_buffer=102, audio_path = "audio/recording.wav"):
         threading.Thread.__init__(self)
         self.queue = queue

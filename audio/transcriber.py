@@ -6,7 +6,10 @@ import os
 
 
 class Transcriber:
-    # args: path to recording
+    """
+    Transcribes audio using OpenAI's Whisper API
+    args: path to recording
+    """
     def __init__(self, path):
         self.path = path
 
