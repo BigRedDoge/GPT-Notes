@@ -1,4 +1,7 @@
 class NoteStorage:
+    """
+    Handles storage of notes
+    """
     def __init__(self, path):
         self.path = path
 
@@ -17,6 +20,9 @@ class NoteStorage:
 
 
 class Note:
+    """
+    Note - stores transcript and completions
+    """
     def __init__(self, path):
         self.path = path
         self.transcript = []
