@@ -15,26 +15,37 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
 def main():
-    q = queue.Queue()
+    # Open a note
     note = NoteStorage("notes").get_note("note 1")
-    recorder = AudioRecorder(q, record_length=15)
+    # Queue for audio frames
+    audio_queue = queue.Queue()
+    # thread for recording audio
+    recorder = AudioRecorder(audio_queue, record_length=15)
+    # transcribes audio
     transcriber = Transcriber("recordings/recording.wav")
+    # chatgpt completions api
     chatgpt = ChatGPT(note)
+    # start audio recording thread
     recorder.start()
     
     try:
         while True:
-            frames = q.get(block=True)
+            # get audio frames from queue
+            frames = audio_queue.get(block=True)
+            # transcribe audio
             text = transcriber.transcribe(frames)
-            print(text)
+            print("transcribed text: ", text)
+            # if recorded speech is too short, skip
             if len(text.split()) < 4:
                 continue
+            # update note with transcript
             note.add_transcript(text)
-
+            # get chatgpt response
             response = chatgpt.chat_completion(text)
-            print("response:", response)
+            print("response: ", response)
+            # update note with completion
             note.add_completion(response)
-
+            # save note
             note.save()
     except KeyboardInterrupt:
         pass
