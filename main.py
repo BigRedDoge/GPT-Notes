@@ -2,13 +2,11 @@ import openai
 import dotenv
 import os
 import queue
-import sys
 
 from audio.recorder import AudioRecorder
 from audio.transcriber import Transcriber
 from chatgpt.completions import ChatGPT
 from notes import NoteStorage
-
 
 dotenv.load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
