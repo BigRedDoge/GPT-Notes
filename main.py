@@ -24,7 +24,7 @@ def main():
     # transcribes audio
     transcriber = Transcriber("recordings/recording.wav")
     # chatgpt completions api
-    chatgpt = ChatGPT(note)
+    chatgpt = ChatGPT()
     # start audio recording thread
     recorder.start()
     

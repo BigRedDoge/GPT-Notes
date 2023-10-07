@@ -2,10 +2,9 @@ import openai
 
 
 class ChatGPT:
-    def __init__(self, note):
-        self.note = note
+    def __init__(self, history_len=5):
         self.temperature = 0.7
-        self.history_len = 5
+        self.history_len = history_len
         self.messages = [
             {"role": "system", "content": "You are a note taker. Take notes on the last prompt. Don't repeat the content of previous notes. Feel free to add any information you think is relevant."}
         ]
